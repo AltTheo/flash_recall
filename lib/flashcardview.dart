@@ -7,8 +7,8 @@ class FlashCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: Colors.blue[400],
-        elevation: 8.0,
+        color: Colors.lightBlueAccent,
+        elevation: 40.0,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
