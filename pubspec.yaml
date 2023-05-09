@@ -39,6 +39,7 @@ dependencies:
   cloud_firestore: ^4.6.0
   firebase_core: ^2.11.0
   ionicons: ^0.2.2
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

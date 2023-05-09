@@ -61,35 +61,44 @@ class _AddCardScreenState extends State<AddCardScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TextFormField(
-                focusNode: questionfocusNode,
-                onFieldSubmitted: (value) {
-                  fieldFocusChange(context, questionfocusNode, answerfocusNode);
-                },
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.text,
-                controller: _questionController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                  labelText: 'Question',
+              Card(
+                elevation: 10,
+                child: TextFormField(
+                  focusNode: questionfocusNode,
+                  onFieldSubmitted: (value) {
+                    fieldFocusChange(
+                        context, questionfocusNode, answerfocusNode);
+                  },
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.text,
+                  controller: _questionController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                    labelText: 'Question',
+                  ),
+                  maxLines: 4,
                 ),
-                maxLines: 4,
               ),
               const SizedBox(
                 height: 30,
               ),
-              TextFormField(
-                focusNode: answerfocusNode,
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.text,
-                controller: _answerController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                  labelText: 'Answer',
+              Card(
+                color: Colors.white,
+                elevation: 10,
+                child: TextFormField(
+                  focusNode: answerfocusNode,
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.text,
+                  controller: _answerController,
+                  decoration: const InputDecoration(
+                    focusColor: Colors.lightBlueAccent,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                    labelText: 'Answer',
+                  ),
+                  maxLines: 4,
                 ),
-                maxLines: 4,
               ),
               const SizedBox(
                 height: 38,

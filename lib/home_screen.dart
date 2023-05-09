@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quiz Flashcards'),
+        title: const Text('Flashcards'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _cardsStream,
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                      child: LinearProgressIndicator(
+                      child: CircularProgressIndicator(
                         value: progress,
                         backgroundColor: Colors.grey[300],
                         valueColor:
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 48.0),
