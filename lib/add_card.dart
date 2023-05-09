@@ -13,21 +13,32 @@ class AddCardScreen extends StatefulWidget {
 class _AddCardScreenState extends State<AddCardScreen> {
   final _questionController = TextEditingController();
   final _answerController = TextEditingController();
+  final FocusNode questionfocusNode = FocusNode();
+  final FocusNode answerfocusNode = FocusNode();
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
 
   void saveCard() async {
     final question = _questionController.text.trim();
     final answer = _answerController.text.trim();
 
     if (question.isEmpty || answer.isEmpty) return;
+
+    questionfocusNode.unfocus();
+    answerfocusNode.unfocus();
+    _answerController.text = '';
+    _questionController.text = '';
     await firestore.collection('Cards').add({
       'question': question,
       'answer': answer,
       'timestamp': FieldValue.serverTimestamp(),
     });
-
-    Navigator.pop(context);
   }
 
   @override
@@ -35,48 +46,57 @@ class _AddCardScreenState extends State<AddCardScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Add a New Card')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 28.0, horizontal: 28),
-        child: Column(
-          children: [
-            TextFormField(
-              keyboardType: TextInputType.text,
-              controller: _questionController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5))),
-                labelText: 'Question',
+        padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 28),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
+                focusNode: questionfocusNode,
+                onFieldSubmitted: (value) {
+                  fieldFocusChange(context, questionfocusNode, answerfocusNode);
+                },
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.text,
+                controller: _questionController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  labelText: 'Question',
+                ),
+                maxLines: 4,
               ),
-              maxLines: 4,
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            TextFormField(
-              keyboardType: TextInputType.multiline,
-              controller: _answerController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5))),
-                labelText: 'Answer',
+              const SizedBox(
+                height: 30,
               ),
-              maxLines: 4,
-            ),
-            const SizedBox(
-              height: 18,
-            ),
-            SingleChildScrollView(
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 8, backgroundColor: Colors.lightBlueAccent),
-                  onPressed: () {
-                    saveCard();
-                  },
-                  child: const Text(
-                    'Save card',
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  )),
-            )
-          ],
+              TextFormField(
+                focusNode: answerfocusNode,
+                textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.text,
+                controller: _answerController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  labelText: 'Answer',
+                ),
+                maxLines: 4,
+              ),
+              const SizedBox(
+                height: 38,
+              ),
+              SingleChildScrollView(
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 8, backgroundColor: Colors.lightBlueAccent),
+                    onPressed: () {
+                      saveCard();
+                    },
+                    child: const Text(
+                      'Save card',
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    )),
+              )
+            ],
+          ),
         ),
       ),
     );

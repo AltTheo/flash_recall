@@ -1,3 +1,4 @@
+import 'package:edcom/bottom_nav.dart';
 import 'package:edcom/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,6 @@ class MyAppState extends State<MyApp> {
         themeAnimationCurve: Curves.bounceIn,
         debugShowCheckedModeBanner: false,
         title: 'Flashcard app',
-        home: const HomeScreen());
+        home: const BottomNavBar());
   }
 }
