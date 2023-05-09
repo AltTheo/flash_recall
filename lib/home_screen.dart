@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Flashcard>? _cards;
+  // List<Flashcard>? _cards;
   int _currentIndex = 0;
   double _initial = 0.0;
 
@@ -22,29 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (flipKey.currentState?.isFront ?? true) {
       flipKey.currentState?.toggleCardWithoutAnimation();
     }
-  }
-
-  void nextCard() {
-    if (!flipKey.currentState!.isFront) {
-      flipKey.currentState!.toggleCardWithoutAnimation();
-    }
-    // resetFlip();
-    setState(() {
-      _currentIndex = (_currentIndex + 1) % _cards!.length;
-      _initial = (_currentIndex / _cards!.length);
-    });
-  }
-
-  void prevCard() {
-    if (!flipKey.currentState!.isFront) {
-      flipKey.currentState!.toggleCardWithoutAnimation();
-    }
-    // resetFlip();
-    setState(() {
-      _currentIndex =
-          _currentIndex - 1 >= 0 ? _currentIndex - 1 : _cards!.length - 1;
-      _initial = (_currentIndex / _cards!.length);
-    });
   }
 
   GlobalKey<FlipCardState> flipKey = GlobalKey<FlipCardState>();
@@ -92,6 +69,29 @@ class _HomeScreenState extends State<HomeScreen> {
             cards.add(Flashcard(
                 question: 'Flashcards would display here',
                 answer: 'Flashcards would display here'));
+          }
+
+          void nextCard() {
+            if (!flipKey.currentState!.isFront) {
+              flipKey.currentState!.toggleCardWithoutAnimation();
+            }
+            // resetFlip();
+            setState(() {
+              _currentIndex = (_currentIndex + 1) % cards.length;
+              _initial = (_currentIndex / cards.length);
+            });
+          }
+
+          void prevCard() {
+            if (!flipKey.currentState!.isFront) {
+              flipKey.currentState!.toggleCardWithoutAnimation();
+            }
+            // resetFlip();
+            setState(() {
+              _currentIndex =
+                  _currentIndex - 1 >= 0 ? _currentIndex - 1 : cards.length - 1;
+              _initial = (_currentIndex / cards.length);
+            });
           }
 
           String value = (_initial * cards.length + 1).toStringAsFixed(0);

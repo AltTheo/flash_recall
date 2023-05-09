@@ -85,9 +85,18 @@ class _DeckState extends State<Deck> {
                               PopupMenuItem(
                                 value: 2,
                                 onTap: () async {
-                                  await _flashcardsRef
-                                      .doc(data.docs[index].id)
-                                      .delete();
+                                  final data = await _flashcardsRef.get();
+                                  if (data.docs.isNotEmpty) {
+                                    if (index == 0) {
+                                      await _flashcardsRef
+                                          .doc(data.docs[index].id)
+                                          .delete();
+                                    } else {
+                                      debugPrint('Index out of bounds: $index');
+                                    }
+                                  } else {
+                                    debugPrint('No documents found');
+                                  }
                                 },
                                 child: const Text(
                                   'delete',

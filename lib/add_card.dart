@@ -18,6 +18,16 @@ class _AddCardScreenState extends State<AddCardScreen> {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  snackbar(String data) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(data),
+        dismissDirection: DismissDirection.startToEnd,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
@@ -39,6 +49,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
       'answer': answer,
       'timestamp': FieldValue.serverTimestamp(),
     });
+    snackbar('Flashcard added successfully');
   }
 
   @override
