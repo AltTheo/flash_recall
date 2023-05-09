@@ -39,6 +39,11 @@ class _DeckState extends State<Deck> {
             return const Center(
               child: CircularProgressIndicator(),
             );
+          } 
+          if(!snapshot.hasData)  {
+            return const Scaffold(
+              body: Center(child: Text('the flashcards are listed here')),
+            );
           }
 
           final data = snapshot.requireData;

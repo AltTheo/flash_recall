@@ -1,8 +1,12 @@
+import 'package:edcom/auth/auth_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
+import 'bottom_nav.dart';
 import 'flashcard.dart';
 import 'flashcardview.dart';
 
@@ -24,6 +28,57 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  void _showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Logout'),
+          content: const Text('Are you sure you want to logout?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                if (await googleSignIn.isSignedIn() && mounted) {
+                  googleSignIn.signOut();
+                  Navigator.of(context).pop(
+                    MaterialPageRoute(
+                        builder: (BuildContext buildContext) =>
+                            const BottomNavBar()),
+                  );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (BuildContext buildContext) =>
+                            const WelcomeScreen()),
+                  );
+                }
+                if (user != null && mounted) {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pop(
+                    MaterialPageRoute(
+                        builder: (BuildContext buildContext) =>
+                            const BottomNavBar()),
+                  );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (BuildContext buildContext) =>
+                            const WelcomeScreen()),
+                  );
+                }
+              },
+              child: const Text('Yes'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('No'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   GlobalKey<FlipCardState> flipKey = GlobalKey<FlipCardState>();
   FlipCardController flipController = FlipCardController();
   Stream<QuerySnapshot> _cardsStream = const Stream.empty();
@@ -34,10 +89,33 @@ class _HomeScreenState extends State<HomeScreen> {
     _cardsStream = FirebaseFirestore.instance.collection('Cards').snapshots();
   }
 
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+            child: InkWell(
+              onTap: () {
+                _showLogoutDialog();
+              },
+              child: ClipOval(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                child: CircleAvatar(
+                  radius: 20,
+                  child: Image.network(
+                    user!.photoURL == null
+                        ? 'https://static.vecteezy.com/system/resources/thumbnails/004/511/281/small/default-avatar-photo-placeholder-profile-picture-vector.jpg'
+                        : '${user?.photoURL}',
+                    height: 95,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
         title: const Text('Flashcards'),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -107,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Card $value of $total  ",
+                    Text("Card $value of $total",
                         style: const TextStyle(fontSize: 20)),
                     const SizedBox(height: 20),
                     Padding(
