@@ -12,8 +12,14 @@ class VerifyScreen extends StatefulWidget {
 
 class VerifyScreenState extends State<VerifyScreen> {
   final auth = FirebaseAuth.instance;
-  late User user;
   late Timer timer;
+  late User user;
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -27,10 +33,15 @@ class VerifyScreenState extends State<VerifyScreen> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
+  Future<void> checkEmailVerified() async {
+    user = auth.currentUser!;
+    await user.reload();
+    if (user.emailVerified && mounted) {
+      timer.cancel();
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => const BottomNavBar(),
+      ));
+    }
   }
 
   @override
@@ -71,16 +82,5 @@ class VerifyScreenState extends State<VerifyScreen> {
         ),
       ),
     );
-  }
-
-  Future<void> checkEmailVerified() async {
-    user = auth.currentUser!;
-    await user.reload();
-    if (user.emailVerified && mounted) {
-      timer.cancel();
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => const BottomNavBar(),
-      ));
-    }
   }
 }

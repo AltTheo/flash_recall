@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FlashCardView extends StatelessWidget {
-  final String text;
   const FlashCardView({super.key, required this.text});
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {

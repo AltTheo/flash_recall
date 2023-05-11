@@ -18,17 +18,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  FlipCardController flipController = FlipCardController();
+  GlobalKey<FlipCardState> flipKey = GlobalKey<FlipCardState>();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  final user = FirebaseAuth.instance.currentUser;
+
+  Stream<QuerySnapshot> _cardsStream = const Stream.empty();
   // List<Flashcard>? _cards;
   int _currentIndex = 0;
+
   double _initial = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _cardsStream = FirebaseFirestore.instance.collection('Cards').snapshots();
+  }
 
   void resetFlip() {
     if (flipKey.currentState?.isFront ?? true) {
       flipKey.currentState?.toggleCardWithoutAnimation();
     }
   }
-
-  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   void _showLogoutDialog() {
     showDialog(
@@ -79,17 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  GlobalKey<FlipCardState> flipKey = GlobalKey<FlipCardState>();
-  FlipCardController flipController = FlipCardController();
-  Stream<QuerySnapshot> _cardsStream = const Stream.empty();
-
-  @override
-  void initState() {
-    super.initState();
-    _cardsStream = FirebaseFirestore.instance.collection('Cards').snapshots();
-  }
-
-  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

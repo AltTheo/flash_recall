@@ -4,25 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Usermodel {
-  final String userName;
-  final String userEmail;
-  final String userId;
-  final String photoURL;
-
   Usermodel(
       {required this.photoURL,
       required this.userEmail,
       required this.userId,
       required this.userName});
-
-  Map<String, dynamic> toMap() {
-    return {
-      'userName': userName,
-      'userEmail': userEmail,
-      'userId': userId,
-      'photoURL': photoURL,
-    };
-  }
 
   // Convert a Firestore document to a user object
   factory Usermodel.fromFirestore(DocumentSnapshot doc) {
@@ -33,6 +19,20 @@ class Usermodel {
       userId: data['userId'],
       photoURL: data['photoUrl']
     );
+  }
+
+  final String photoURL;
+  final String userEmail;
+  final String userId;
+  final String userName;
+
+  Map<String, dynamic> toMap() {
+    return {
+      'userName': userName,
+      'userEmail': userEmail,
+      'userId': userId,
+      'photoURL': photoURL,
+    };
   }
 }
 

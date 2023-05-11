@@ -48,11 +48,11 @@ class SignInScreen extends StatefulWidget {
 }
 
 class SignInState extends State<SignInScreen> {
-  bool passwordVisible = true;
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> emailKey = GlobalKey();
+  TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> passwordKey = GlobalKey();
+  bool passwordVisible = true;
 
   //Snackbar
   snackbar(String data) {

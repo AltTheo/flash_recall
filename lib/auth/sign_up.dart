@@ -51,18 +51,17 @@ class Register extends StatefulWidget {
 }
 
 class RegisterState extends State<Register> {
-  bool passwordVisible = true;
+  FocusNode emailFocus = FocusNode();
+  GlobalKey<FormState> emailKey = GlobalKey();
+  String errorTextvalue = '';
+  FocusNode nameFocus = FocusNode();
   TextEditingController newEmailController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
-  TextEditingController userNameController = TextEditingController();
-  FocusNode nameFocus = FocusNode();
-  FocusNode emailFocus = FocusNode();
-  FocusNode passwordFocus = FocusNode();
-  GlobalKey<FormState> userKey = GlobalKey();
-  GlobalKey<FormState> emailKey = GlobalKey();
   GlobalKey<FormState> passKey = GlobalKey();
-
-  String errorTextvalue = '';
+  FocusNode passwordFocus = FocusNode();
+  bool passwordVisible = true;
+  GlobalKey<FormState> userKey = GlobalKey();
+  TextEditingController userNameController = TextEditingController();
 
   fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {

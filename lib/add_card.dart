@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddCardScreen extends StatefulWidget {
-  final Function onCardAdded;
   const AddCardScreen({Key? key, required this.onCardAdded}) : super(key: key);
+
+  final Function onCardAdded;
 
   @override
   _AddCardScreenState createState() => _AddCardScreenState();
 }
 
 class _AddCardScreenState extends State<AddCardScreen> {
-  final _questionController = TextEditingController();
-  final _answerController = TextEditingController();
-  final FocusNode questionfocusNode = FocusNode();
   final FocusNode answerfocusNode = FocusNode();
-
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FocusNode questionfocusNode = FocusNode();
+
+  final _answerController = TextEditingController();
+  final _questionController = TextEditingController();
 
   snackbar(String data) {
     ScaffoldMessenger.of(context).showSnackBar(

@@ -15,43 +15,6 @@ import 'package:flutter/foundation.dart'
 /// );
 /// ```
 class DefaultFirebaseOptions {
-  static FirebaseOptions get currentPlatform {
-    if (kIsWeb) {
-      return web;
-    }
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.android:
-        return android;
-      case TargetPlatform.iOS:
-        return ios;
-      case TargetPlatform.macOS:
-        return macos;
-      case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
-      case TargetPlatform.linux:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
-      default:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions are not supported for this platform.',
-        );
-    }
-  }
-
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDoPDrGA9UeiNCJLwwRXUQRtzfxZPMU5LM',
-    appId: '1:1070122737401:web:8c693c2d26af33800a0c28',
-    messagingSenderId: '1070122737401',
-    projectId: 'flashcardapp-39b34',
-    authDomain: 'flashcardapp-39b34.firebaseapp.com',
-    storageBucket: 'flashcardapp-39b34.appspot.com',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBtQwiEx8Aw9F4RlDJ0TNvJmbOOox0S4IE',
     appId: '1:1070122737401:android:ec93c66272ff43dc0a0c28',
@@ -79,4 +42,41 @@ class DefaultFirebaseOptions {
     iosClientId: '1070122737401-0mm0g3n12t46qdid1b8pts0l1bspdvlq.apps.googleusercontent.com',
     iosBundleId: 'com.example.edcom',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDoPDrGA9UeiNCJLwwRXUQRtzfxZPMU5LM',
+    appId: '1:1070122737401:web:8c693c2d26af33800a0c28',
+    messagingSenderId: '1070122737401',
+    projectId: 'flashcardapp-39b34',
+    authDomain: 'flashcardapp-39b34.firebaseapp.com',
+    storageBucket: 'flashcardapp-39b34.appspot.com',
+  );
+
+  static FirebaseOptions get currentPlatform {
+    if (kIsWeb) {
+      return web;
+    }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return android;
+      case TargetPlatform.iOS:
+        return ios;
+      case TargetPlatform.macOS:
+        return macos;
+      case TargetPlatform.windows:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      default:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions are not supported for this platform.',
+        );
+    }
+  }
 }
