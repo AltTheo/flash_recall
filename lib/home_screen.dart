@@ -181,12 +181,12 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: const BoxDecoration(color: Colors.white),
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text("Card $value of $total",
-                        style: const TextStyle(fontSize: 20)),
+                        style: const TextStyle(fontSize: 25)),
                     const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -210,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           flipOnTouch: true,
                           controller: flipController,
                           direction: FlipDirection.HORIZONTAL,
-                          speed: 650,
+                          speed: 750,
                           back: FlashCardView(
                             text: cards[_currentIndex].answer,
                           ),
@@ -241,8 +241,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             prevCard();
                             // updateToPrev();
                           },
-                          child: const Icon(Icons.arrow_back_ios,
-                              color: Colors.black),
+                          child: const Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black,
+                            size: 35,
+                          ),
                         ),
                         const SizedBox(
                           width: 120,
@@ -261,6 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: const Icon(
                             Icons.arrow_forward_ios,
                             color: Colors.black,
+                            size: 35,
                           ),
                         ),
                       ],

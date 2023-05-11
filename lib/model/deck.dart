@@ -39,11 +39,6 @@ class _DeckState extends State<Deck> {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } 
-          if(!snapshot.hasData)  {
-            return const Scaffold(
-              body: Center(child: Text('the flashcards are listed here')),
-            );
           }
 
           final data = snapshot.requireData;
@@ -54,61 +49,62 @@ class _DeckState extends State<Deck> {
             itemCount: flashcards.length,
             itemBuilder: (context, index) {
               final flashcard = flashcards[index];
-              return InkWell(
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) =>
-                            const BottomNavBar() // passing the Flashcard object to the Home widget
-                        ),
-                  );
+              final docId = data.docs[index].id;
+              return Dismissible(
+                key: UniqueKey(),
+                onDismissed: (direction) async {
+                  await _flashcardsRef.doc(docId).delete();
+                  setState(() {
+                    flashcards.removeAt(index);
+                  });
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    color: Colors.lightBlueAccent,
-                    elevation: 10.0,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 18.0, horizontal: 10.0),
-                      child: ListTile(
-                        title: Text(
-                          flashcard.question,
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                        trailing: PopupMenuButton(
-                          itemBuilder: (BuildContext context) {
-                            return <PopupMenuEntry>[
-                              PopupMenuItem(
-                                value: 1,
-                                onTap: () {},
-                                child: const Text(
-                                  'Edit',
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const BottomNavBar(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      color: Colors.lightBlueAccent,
+                      elevation: 10.0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 18.0, horizontal: 10.0),
+                        child: ListTile(
+                          title: Text(
+                            flashcard.question,
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                          trailing: PopupMenuButton(
+                            itemBuilder: (BuildContext context) {
+                              return <PopupMenuEntry>[
+                                PopupMenuItem(
+                                  value: 1,
+                                  onTap: () {},
+                                  child: const Text(
+                                    'Edit',
+                                  ),
                                 ),
-                              ),
-                              PopupMenuItem(
-                                value: 2,
-                                onTap: () async {
-                                  final data = await _flashcardsRef.get();
-                                  if (data.docs.isNotEmpty) {
-                                    if (index == 0) {
-                                      await _flashcardsRef
-                                          .doc(data.docs[index].id)
-                                          .delete();
-                                    } else {
-                                      debugPrint('Index out of bounds: $index');
-                                    }
-                                  } else {
-                                    debugPrint('No documents found');
-                                  }
-                                },
-                                child: const Text(
-                                  'delete',
+                                PopupMenuItem(
+                                  value: 2,
+                                  onTap: () async {
+                                    await _flashcardsRef.doc(docId).delete();
+                                    setState(() {
+                                      flashcards.removeAt(index);
+                                    });
+                                  },
+                                  child: const Text(
+                                    'Delete',
+                                  ),
                                 ),
-                              ),
-                            ];
-                          },
+                              ];
+                            },
+                          ),
                         ),
                       ),
                     ),

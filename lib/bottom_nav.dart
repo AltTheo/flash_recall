@@ -44,15 +44,15 @@ class BottomNavBarState extends State<BottomNavBar> {
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   activeIcon: Icon(CupertinoIcons.square_stack_3d_up_fill),
-                  icon: Icon(CupertinoIcons.square_stack_3d_up_fill),
+                  icon: Icon(CupertinoIcons.square_stack_3d_up),
                   label: 'Cards'),
               BottomNavigationBarItem(
-                  activeIcon: Icon(CupertinoIcons.rectangle_stack_badge_plus),
+                  activeIcon: Icon(CupertinoIcons.rectangle_stack_fill_badge_plus),
                   icon: Icon(CupertinoIcons.rectangle_stack_badge_plus),
                   label: 'Add flashcard'),
               BottomNavigationBarItem(
                   activeIcon: Icon(CupertinoIcons.square_stack_fill),
-                  icon: Icon(CupertinoIcons.square_stack_fill),
+                  icon: Icon(CupertinoIcons.square_stack),
                   label: 'View deck'),
             ],
             currentIndex: selectedIndex,

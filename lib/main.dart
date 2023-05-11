@@ -25,13 +25,15 @@ class MyAppState extends State<MyApp> {
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               type: BottomNavigationBarType.fixed,
               unselectedItemColor: Colors.black,
-              backgroundColor: Colors.white54),
+              selectedItemColor:Colors.lightBlueAccent,
+              // backgroundColor: Colors.white54
+              ),
           appBarTheme: const AppBarTheme(
               shadowColor: Colors.white54,
               elevation: 1,
               actionsIconTheme: IconThemeData(color: Colors.black),
               color: Colors.white54,
-              centerTitle: true,
+              centerTitle: false,
               titleTextStyle: TextStyle(fontSize: 25, color: Colors.black)),
           useMaterial3: true,
           pageTransitionsTheme: const PageTransitionsTheme(

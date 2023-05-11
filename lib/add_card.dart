@@ -57,7 +57,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Add a New Card')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 28),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 28),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -73,6 +73,8 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   keyboardType: TextInputType.text,
                   controller: _questionController,
                   decoration: const InputDecoration(
+                    focusedBorder: OutlineInputBorder(),
+                    focusColor: Colors.lightBlue,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5))),
                     labelText: 'Question',
@@ -87,12 +89,16 @@ class _AddCardScreenState extends State<AddCardScreen> {
                 color: Colors.white,
                 elevation: 10,
                 child: TextFormField(
+                  onEditingComplete: () {
+                    saveCard();
+                  },
                   focusNode: answerfocusNode,
                   textInputAction: TextInputAction.done,
                   keyboardType: TextInputType.text,
                   controller: _answerController,
                   decoration: const InputDecoration(
-                    focusColor: Colors.lightBlueAccent,
+                    focusedBorder: OutlineInputBorder(),
+                    focusColor: Colors.lightBlue,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5))),
                     labelText: 'Answer',
@@ -112,7 +118,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     },
                     child: const Text(
                       'Save card',
-                      style: TextStyle(fontSize: 15, color: Colors.black),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     )),
               )
             ],
