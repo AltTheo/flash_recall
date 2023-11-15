@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "1070122737401-idhn40afkkbbn58f44o072rohr9uje7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.edcom",
+            "certificate_hash": "e153c0508030cc72ffcad552d4d979378a4691c4"
+          }
+        },
+        {
           "client_id": "1070122737401-qf7nkjrdnjkhpv6buhmvthlfh6flopcn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
