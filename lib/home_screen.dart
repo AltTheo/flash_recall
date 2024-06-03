@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-        title: const Text('Flashcards'),
+        title: const Text('Cards'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _cardsStream,

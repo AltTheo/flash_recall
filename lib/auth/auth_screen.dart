@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
                   size: 150.0, color: Colors.lightBlue),
               const SizedBox(height: 10.0),
               const Text(
-                'Welcome to Flashcard App',
+                'Welcome to Flash Recall',
                 style: TextStyle(fontSize: 20),
               ),
               const SizedBox(

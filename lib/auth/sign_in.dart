@@ -65,6 +65,18 @@ class SignInState extends State<SignInScreen> {
     );
   }
 
+  void _showLoadingDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const AlertDialog.adaptive(
+          title: Text('Please wait'),
+          content: LinearProgressIndicator(),
+        );
+      },
+    );
+  }
+
 // Login Function
   Future<User?> loginUsingEmailPassword(
       {required String email,
@@ -137,6 +149,7 @@ class SignInState extends State<SignInScreen> {
 
 //Login fucntion
   login() async {
+    _showLoadingDialog();
     User? user = await loginUsingEmailPassword(
         email: emailController.text,
         password: passwordController.text,
