@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'bottom_nav.dart';
 import 'flashcard.dart';
 import 'flashcardview.dart';
 
@@ -165,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           String value = (_initial * cards.length + 1).toStringAsFixed(0);
-          String value1 = (_currentIndex + 1).toString();
+          (_currentIndex + 1).toString();
           String total = cards.length.toString();
           double progress = (_currentIndex + 1) / cards.length;
 

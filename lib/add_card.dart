@@ -1,4 +1,3 @@
-import 'package:edcom/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -8,10 +7,10 @@ class AddCardScreen extends StatefulWidget {
   final Function onCardAdded;
 
   @override
-  _AddCardScreenState createState() => _AddCardScreenState();
+  AddCardScreenState createState() => AddCardScreenState();
 }
 
-class _AddCardScreenState extends State<AddCardScreen> {
+class AddCardScreenState extends State<AddCardScreen> {
   final FocusNode answerfocusNode = FocusNode();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FocusNode questionfocusNode = FocusNode();

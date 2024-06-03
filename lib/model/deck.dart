@@ -1,5 +1,4 @@
 import 'package:edcom/bottom_nav.dart';
-import 'package:edcom/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../flashcard.dart';
@@ -8,10 +7,10 @@ class Deck extends StatefulWidget {
   const Deck({Key? key}) : super(key: key);
 
   @override
-  _DeckState createState() => _DeckState();
+  DeckState createState() => DeckState();
 }
 
-class _DeckState extends State<Deck> {
+class DeckState extends State<Deck> {
   late final CollectionReference _flashcardsRef;
 
   @override

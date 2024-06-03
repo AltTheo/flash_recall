@@ -1,5 +1,4 @@
 import 'package:edcom/auth/sign_in.dart';
-import 'package:edcom/bottom_nav.dart';
 import 'package:edcom/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

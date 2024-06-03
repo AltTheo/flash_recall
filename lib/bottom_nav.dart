@@ -3,7 +3,6 @@ import 'package:edcom/home_screen.dart';
 import 'package:edcom/model/deck.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -28,10 +27,8 @@ class BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: Scaffold(
           // appBar: AppBar(
           //     title: Text('Bottom NavBar'), backgroundColor: Colors.purple),
@@ -47,7 +44,8 @@ class BottomNavBarState extends State<BottomNavBar> {
                   icon: Icon(CupertinoIcons.square_stack_3d_up),
                   label: 'Cards'),
               BottomNavigationBarItem(
-                  activeIcon: Icon(CupertinoIcons.rectangle_stack_fill_badge_plus),
+                  activeIcon:
+                      Icon(CupertinoIcons.rectangle_stack_fill_badge_plus),
                   icon: Icon(CupertinoIcons.rectangle_stack_badge_plus),
                   label: 'Add flashcard'),
               BottomNavigationBarItem(
