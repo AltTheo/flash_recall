@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.edcom">
    <application
-        android:label="edcom"
+        android:label="Flash Recall"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

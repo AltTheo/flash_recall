@@ -102,8 +102,10 @@ class RegisterState extends State<Register> {
           userId: user.uid,
           photoURL: '${user.photoURL}');
       addUser(newUser);
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const BottomNavBar()));
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const BottomNavBar()),
+        (Route<dynamic> route) => false,
+      );
     }
   }
 
@@ -333,9 +335,9 @@ class RegisterState extends State<Register> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(children: const [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(children: [
                     Expanded(
                       child: Divider(
                         thickness: 1,
@@ -369,10 +371,11 @@ class RegisterState extends State<Register> {
                             userId: user.uid,
                             photoURL: '${user.photoURL}');
                         addUser(newUser);
-                        Navigator.of(context).pop(MaterialPageRoute(
-                            builder: (context) => const SignUp()));
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const BottomNavBar()));
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => const BottomNavBar()),
+                          (Route<dynamic> route) => false,
+                        );
                       }
                     },
                     child: Row(

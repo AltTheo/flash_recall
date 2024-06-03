@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return AlertDialog.adaptive(
           title: const Text('Logout'),
           content: const Text('Are you sure you want to logout?'),
           actions: <Widget>[
@@ -53,28 +53,20 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () async {
                 if (await googleSignIn.isSignedIn() && mounted) {
                   googleSignIn.signOut();
-                  Navigator.of(context).pop(
+                  Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                        builder: (BuildContext buildContext) =>
-                            const BottomNavBar()),
-                  );
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (BuildContext buildContext) =>
-                            const WelcomeScreen()),
+                        builder: (context) => const WelcomeScreen()),
+                    (Route<dynamic> route) =>
+                        false, // This predicate always returns false, so it removes all routes below the new route
                   );
                 }
                 if (user != null && mounted) {
                   FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pop(
+                  Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                        builder: (BuildContext buildContext) =>
-                            const BottomNavBar()),
-                  );
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (BuildContext buildContext) =>
-                            const WelcomeScreen()),
+                        builder: (context) => const WelcomeScreen()),
+                    (Route<dynamic> route) =>
+                        false, // This predicate always returns false, so it removes all routes below the new route
                   );
                 }
               },

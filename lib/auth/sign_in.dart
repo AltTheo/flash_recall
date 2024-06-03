@@ -143,10 +143,10 @@ class SignInState extends State<SignInScreen> {
         context: context);
     debugPrint('$user');
     if (user != null && mounted) {
-      Navigator.of(context)
-          .pop(MaterialPageRoute(builder: (context) => const SignInScreen()));
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const BottomNavBar()));
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const BottomNavBar()),
+        (Route<dynamic> route) => false,
+      );
     }
   }
 
@@ -306,9 +306,9 @@ class SignInState extends State<SignInScreen> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(children: const [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(children: [
                     Expanded(
                       child: Divider(
                         thickness: 1,
@@ -335,10 +335,11 @@ class SignInState extends State<SignInScreen> {
                     onPressed: () async {
                       final navigator = Navigator.of(context);
                       await signInWithGoogle();
-                      navigator.pop(MaterialPageRoute(
-                          builder: (context) => const SignInScreen()));
-                      navigator.pushReplacement(MaterialPageRoute(
-                          builder: (context) => const BottomNavBar()));
+                      navigator.pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => const BottomNavBar()),
+                        (Route<dynamic> route) => false,
+                      );
                     },
                     child: Row(
                       children: [
